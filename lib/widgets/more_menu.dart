@@ -13,16 +13,13 @@ class MoreMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<String>(
-      // ZAMIANA: używamy child zamiast icon -> pełna kontrola nad wyglądem
       child: IconButton(
-        onPressed: null, // ważne: onPressed null, bo klik obsługuje PopupMenuButton
+        onPressed: null,
         icon: const Icon(Icons.more_vert),
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints.tightFor(width: 36, height: 36),
         style: ButtonStyle(
-          // brak prostokątnego "podświetlenia" na hover/click
           overlayColor: WidgetStateProperty.all(Colors.transparent),
-          // okrągły hitbox (zamiast kwadratu)
           shape: WidgetStateProperty.all(const CircleBorder()),
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),

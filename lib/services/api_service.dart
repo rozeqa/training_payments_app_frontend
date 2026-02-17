@@ -7,11 +7,12 @@ import '../models/training.dart';
 class ApiService {
   static const String baseUrl = String.fromEnvironment(
     'API_BASE_URL',
-    defaultValue: 'http://localhost:3000',
+    defaultValue: 'https://training-payment-app.onrender.com',
   );
 
   // USERS
   static Future<List<User>> fetchUsers() async {
+
     final res = await http.get(Uri.parse('$baseUrl/users'));
     if (res.statusCode != 200) {
       throw Exception('Failed to load users: ${res.statusCode} ${res.body}');
@@ -83,7 +84,7 @@ class ApiService {
     final List data = jsonDecode(res.body) as List;
 
     final buffer = StringBuffer();
-    buffer.writeln('date,userName,sessions,amount'); // bez email
+    buffer.writeln('date,userName,sessions,amount');
 
     for (final item in data) {
       final m = item as Map<String, dynamic>;
@@ -119,8 +120,8 @@ class ApiService {
   static Future<void> createTraining({
     required String title,
     required DateTime date,
-    int? repeatCount,      // ile razy (np. 8)
-    int intervalWeeks = 1, // co ile tygodni (domyślnie 1)
+    int? repeatCount,      
+    int intervalWeeks = 1, 
   }) async {
     final res = await http.post(
       Uri.parse('$baseUrl/trainings'),
